@@ -1,0 +1,22 @@
+.banner {
+    border: solid rgb(64, 64, 71) 9px;
+    border-radius: 5px;
+    font-family: fantasy;
+    background-color: rgb(64, 64, 71);
+    
+}
+
+h2{
+    font-family: cursive;
+}
+
+.logo{
+    padding-right: 5px;
+}
+
+
+
+.linhas{
+    color: white;
+}
+

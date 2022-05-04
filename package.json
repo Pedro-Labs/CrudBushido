@@ -1,22 +1,26 @@
 {
-  "name": "crudbushido",
+  "name": "api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "projeo crud sr",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pedro-Labs/CrudBushido.git"
-  },
-  "author": "",
+  "keywords": [
+    "nodejs",
+    "express",
+    "mysql",
+    "restapi"
+  ],
+  "author": "João",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Pedro-Labs/CrudBushido/issues"
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.0",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1"
   },
-  "homepage": "https://github.com/Pedro-Labs/CrudBushido#readme",
-  "engines": {
-    "node": "16.14.2"
+  "devDependencies": {
+    "@types/morgan": "^1.9.3"
   }
 }

@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 var corsOptions = {
-  origin: "https://crud-heroku321.herokuapp.com/"
+  origin: "http://localhost:4200"
 };
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json

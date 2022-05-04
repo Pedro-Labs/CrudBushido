@@ -39,7 +39,7 @@ export class CrudComponent implements OnInit {
 }
 
 
-  url = 'http://localhost:8080'
+  url = 'https://crud-heroku321.herokuapp.com/'
   produto: produtos[]
   inputProduto = "";
   inputPreco = "";

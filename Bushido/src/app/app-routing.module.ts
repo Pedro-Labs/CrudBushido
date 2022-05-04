@@ -6,7 +6,7 @@ import { CrudComponent } from './components/crud/crud.component';
 
 const routes: Routes = [
   {
-    path: "",
+    path: "/",
     component: CrudComponent
   },
   // {

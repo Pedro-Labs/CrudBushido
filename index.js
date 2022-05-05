@@ -9,6 +9,6 @@ app.get("/", function (req,res) {
     res.send('Servindo?')
 })
 
-app.listen(port, () => [
+app.listen(PORT, () => [
     console.info(`Aplicação rodando em http://localhost:${PORT}`)
 ])

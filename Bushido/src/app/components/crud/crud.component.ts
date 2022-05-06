@@ -33,9 +33,14 @@ export class CrudComponent implements OnInit {
       this.displayBasic = true;
   }
 
-  showPositionDialog(position: string) {
+  showPositionDialog(position: string, produto: string, preco: string, descricao: string, id: number) {
     this.position = position;
     this.displayPosition = true;
+
+    this.inputProduto = produto;
+      this.inputPreco = preco;
+      this.inputDescricao = descricao;
+      this.inputId = id;
 }
 
 
@@ -48,6 +53,7 @@ export class CrudComponent implements OnInit {
 
 
   constructor(private _route: Router, private _httpclient: HttpClient,) {
+    
     this.produto = [];
    }
 
@@ -56,6 +62,7 @@ export class CrudComponent implements OnInit {
     return this._httpclient.get(this.url+ '/api/tutorials').subscribe((result: any) => {
       this.produto = [];
       for (var item of result){
+        
         this.produto.push({id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
         })
       }
@@ -64,10 +71,12 @@ export class CrudComponent implements OnInit {
 
    //Função excluir produtos
   delete(id: number) {
+     debugger;
      this._httpclient.delete(this.url + `/api/tutorials/${id}`,).subscribe((result: any) => {
       this.getAll();
       this.displayPosition = false;
     })
+    
   }
   
   //Função atualizar produtos

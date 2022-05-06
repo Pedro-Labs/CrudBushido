@@ -1,14 +1,13 @@
-const express = require('express');
-const app = express();
+// const express = require('express');
+ //const app = express();
 
-const PORT = process.env.PORT || 8080
+// const PORT = process.env.PORT || 8080
 
-app.use(express.static(__dirname + '/Bushido'))
+// app.use(express.static(__dirname + 'Bushido'))
 
-app.get('/*', (req,res) => {
-    res.sendFile(__dirname + '/Bushido/src/app/components/crud/crud.component.html')
-})
-
-app.listen(PORT, () => {
-    console.log(('Servidindo na porta ' + PORT))
-})
+// app.get('/', (req,res) => {
+//     res.sendFile(__dirname + '/src/app/components/crud/crud.component.html')
+// })
+// app.listen(PORT, () => {
+//     console.log(('Servidindo na porta ' + PORT))
+// })

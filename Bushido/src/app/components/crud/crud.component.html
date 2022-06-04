@@ -5,24 +5,27 @@
                     class="logo" width="60"></span>Bushido Kimonos</h1>
     </header>
     <h2 align="center">Sistema de cadastro de Produtos:</h2><br><br>
+    <button pButton pRipple type="button" label="Login" class="p-button-rounded p-button-info"
+        (click)="showMaximizableDialog()"></button><br><br>
+
 
     <p-button label="Novo Produto" icon="pi pi-plus" (click)="showBasicDialog()"></p-button><br><br>
     <div>
 
         <!-- Tabela de produtos -->
-        <p-table [value]="produto" >
-            <ng-template pTemplate="header" >
+        <p-table [value]="produto" [paginator]="true" [rows]="12" [rowsPerPageOptions]="[5, 12, 25, 20]" [totalRecords]="totalRecords" [pageLinks]="3" [columns]="cols">
+            <ng-template pTemplate="header">
                 <tr>
                     <th style="background-color: rgb(238, 228, 228)">Produto</th>
                     <th style="background-color: rgb(238, 228, 228)">Preço</th>
                     <th style="background-color: rgb(238, 228, 228)">Descrição</th>
-                    <th style="background-color: rgb(238, 228, 228)">Gerenciar</th>
+                    <th style="background-color: rgb(238, 228, 228)">Ações</th>
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-produto>
+            <ng-template pTemplate="body" let-produto let-rowData let-columns="columns">
                 <tr style="background-color: rgb(64, 64, 71)">
                     <td class="linhas">{{produto.produto}}</td>
-                    <td class="linhas">{{produto.preco| currency: 'BRL'}} </td>
+                    <td class="linhas">{{produto.preco | currency: 'BRL'}} </td>
                     <td class="linhas">{{produto.descricao}}</td>
                     <td>
                         <!--Editar-->
@@ -36,7 +39,7 @@
                                 <!--Excluir-->
                                 <button pButton pRipple type="button" icon="pi pi-trash"
                                     class="p-button-rounded p-button-danger p-button-outlined"
-                                    (click)="delete(produto.id)"></button>
+                                    (click)="showPositionDialog('top-right', produto.id)"></button>
 
                                 <!--Confirmar Exclusão-->
 
@@ -48,12 +51,10 @@
                                     </p>
                                     <ng-template pTemplate="footer">
                                         <p-button icon="pi pi-check" label="Sim, excluir" styleClass="p-button-text"
-                                            (click)="delete(produto.id)">
+                                            (click)="delete(inputId)">
                                         </p-button>
                                     </ng-template>
                                 </p-dialog>
-
-
                             </div>
                         </div>
                     </td>
@@ -99,6 +100,29 @@
     </div>
 </p-dialog>
 
+<!--Login-->
+<p-dialog header="Faça o Login para utilizar o sistema:" [(visible)]="displayMaximizable" [modal]="true"
+    [style]="{width: '50vw'}">
+    <div class="form-group">
+        <div class="grid p-fluid">
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup">
+                    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    <input pInputText name="email" [(ngModel)]="inputEmail" placeholder="Email" id="email" required>
+                </div><br>
+                <div class="form-group">
+                    <p-password id="password" name="password" [(ngModel)]="inputPassword" [toggleMask]="true"
+                        placeholder="Senha"></p-password>
+                </div>
+                <hr>
+                <div>
+                    <button pButton pRipple label="Login" class="p-button-raised p-button-success"
+                        (click)="login(inputEmail, inputPassword)"></button>
+                </div><br>
+            </div>
+        </div>
+    </div>
+</p-dialog>
 
 
 <!-- Novo Produto-->
@@ -108,14 +132,14 @@
         <div class="col-12 md:col-4">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon"><i class="pi pi-tag"></i></span>
-                <input id="nome" name="nome" [(ngModel)]="inputProduto" type="text" pInputText placeholder="Produto">
+                <input id="nome" name="nome" [(ngModel)]="inputProduto2" type="text" pInputText placeholder="Produto">
             </div>
         </div>
 
         <div class="col-12 md:col-4">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">$</span>
-                <input id="preco" name="preco" [(ngModel)]="inputPreco" type="text" pInputText placeholder="Preço">
+                <input id="preco" name="preco" [(ngModel)]="inputPreco2" type="text" pInputText placeholder="Preço">
                 <span class="p-inputgroup-addon">.00</span>
             </div>
         </div>
@@ -123,26 +147,25 @@
         <div class="col-12 md:col-4">
             <div class="p-inputgroup">
                 <span class="p-inputgroup-addon">Descrição</span>
-                <input id="descricao" name="descricao" [(ngModel)]="inputDescricao" type="text" pInputText
+                <input id="descricao" name="descricao" [(ngModel)]="inputDescricao2" type="text" pInputText
                     placeholder="Sobre o produto:">
             </div>
             <span class="p-buttonset">
                 <button class="salvar" pButton type="button" label="Salvar" icon="pi pi-check"
-                    (click)="new(inputProduto, inputPreco, inputDescricao)"></button>
+                    (click)="new(inputProduto2, inputPreco2, inputDescricao2)"></button>
             </span>
         </div>
     </div>
 </p-dialog>
 
 
-<!-- Confirmar Exclusão-->
+<!-- Aviso de Autenticação-->
 
-<!-- <p-dialog header="Confirmar Exclusão" [(visible)]="displayPosition" [position]="position" [modal]="true"
-    [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-    <p>Tem certeza que deseja excluir este produto?<br>
-        (Esta ação não pode ser desfeita!)
+<!-- <p-dialog header="Você precisa estar logado, para utilizar este sistema!" [(visible)]="message" [style]="{width: '50vw'}">
+    <p>Sua sessão foi expirada, ou usuário inválido.<br>
+        Tente Novamente, ou refaça o Login.
     </p>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" label="Sim, excluir" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog> -->

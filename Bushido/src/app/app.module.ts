@@ -18,6 +18,8 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
+import {PasswordModule} from 'primeng/password';
+
 
 
 
@@ -43,6 +45,7 @@ import { InputTextModule } from 'primeng/inputtext';
     DialogModule,
     ToastModule,
     InputTextModule,
+    PasswordModule
     
   ],
   providers: [HttpClientModule],

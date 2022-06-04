@@ -4,3 +4,8 @@ export interface produtos {
     descricao: string,
     preco: string
 }
+
+export interface users {
+    email: string,
+    password: string
+}

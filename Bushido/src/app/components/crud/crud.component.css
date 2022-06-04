@@ -1,13 +1,14 @@
 .banner {
-    border: solid rgb(64, 64, 71) 9px;
+    border: solid rgb(100, 116, 139);
     border-radius: 5px;
     font-family: fantasy;
-    background-color: rgb(64, 64, 71);
+    background-color: rgb(100, 116, 139);
     
 }
 
 h2{
     font-family: cursive;
+    
 }
 
 .logo{

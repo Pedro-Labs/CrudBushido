@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { produtos, users } from './model/getmodel';
+import { MenuItem } from 'primeng/api';
 
 
 @Component({ 
@@ -12,6 +13,7 @@ import { produtos, users } from './model/getmodel';
 
 
 export class CrudComponent implements OnInit {
+  items!: MenuItem[];
 
   display!: boolean ;
   displayBasic!: boolean;
@@ -160,6 +162,16 @@ export class CrudComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.items = [
+      {label: 'Maior preço', icon: 'pi pi-dollar', command: () => {
+          this;
+      }},
+      {label: 'Menor preço', icon: 'pi pi-dollar', command: () => {
+          this;
+      }},
+  ];
+
+
     this.getAll();
     this.cols = [
       { field: 'produto', header: 'produto' },

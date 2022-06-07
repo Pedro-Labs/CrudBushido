@@ -33,7 +33,7 @@ Tutorial.findById = (id, result) => {
   });
 };
 Tutorial.getAll = (title, result) => {
-  let query = "SELECT * FROM produtos";
+  let query = "SELECT * FROM produtos ORDER BY produto";
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
   }

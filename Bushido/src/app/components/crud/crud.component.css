@@ -1,9 +1,13 @@
 .banner {
-    border: solid rgb(100, 116, 139);
+    border: solid #0b2b5f;
     border-radius: 5px;
     font-family: fantasy;
-    background-color: rgb(100, 116, 139);
+    background-color: #0b2b5f;
     
+}
+
+h1{
+    color: rgba(255, 255, 255, 0.918);
 }
 
 h2{
@@ -18,6 +22,6 @@ h2{
 
 
 .linhas{
-    color: white;
+    color: rgb(255, 255, 255);
 }
 

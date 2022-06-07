@@ -11,7 +11,7 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-
+import {SplitButtonModule} from 'primeng/splitbutton';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
@@ -28,7 +28,6 @@ import {PasswordModule} from 'primeng/password';
   declarations: [
     AppComponent,
     CrudComponent,
-
     
   ],
   imports: [
@@ -45,7 +44,8 @@ import {PasswordModule} from 'primeng/password';
     DialogModule,
     ToastModule,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    SplitButtonModule
     
   ],
   providers: [HttpClientModule],

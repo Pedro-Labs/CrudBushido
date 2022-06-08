@@ -7,6 +7,8 @@ module.exports = app => {
     router.post("/",[auth, admin], produtos.create);
     // Retrieve all Tutorials
     router.get("/",[auth, admin], produtos.findAll);
+    router.get("/exp",[auth, admin], produtos.findExp); //mais caro
+    router.get("/cheap",[auth, admin], produtos.findCheap); //mais barato
     // Retrieve all published Tutorials
     router.get("/published",[auth, admin], produtos.findAllPublished);
     // Retrieve a single Tutorial with id
@@ -19,3 +21,4 @@ module.exports = app => {
     router.delete("/",[auth, admin], produtos.deleteAll);
     app.use('/api/tutorials', router);
   };
+

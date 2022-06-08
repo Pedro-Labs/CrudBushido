@@ -11,16 +11,16 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule} from 'primeng/button';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import {SplitButtonModule} from 'primeng/splitbutton';
+import { SplitButtonModule } from 'primeng/splitbutton';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { DialogModule } from 'primeng/dialog';
 import { ToastModule } from 'primeng/toast';
 import { InputTextModule } from 'primeng/inputtext';
-import {PasswordModule} from 'primeng/password';
+import { PasswordModule } from 'primeng/password';
 
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter'
 
 
 
@@ -45,7 +45,8 @@ import {PasswordModule} from 'primeng/password';
     ToastModule,
     InputTextModule,
     PasswordModule,
-    SplitButtonModule
+    SplitButtonModule,
+    Ng2SearchPipeModule
     
   ],
   providers: [HttpClientModule],

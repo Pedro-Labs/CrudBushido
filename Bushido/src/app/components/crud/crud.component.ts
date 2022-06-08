@@ -75,6 +75,8 @@ export class CrudComponent implements OnInit {
   inputPreco2 = "";
   inputDescricao2 = "";
 
+  searchInput = "";
+
   //Paginação
   totalRecords!: number;
   cols!: any[];
@@ -87,9 +89,45 @@ export class CrudComponent implements OnInit {
     this.produto = [];
    }
 
-   //Função exibir produtos
+
+  Search(){
+    if(this.searchInput == ""){
+      this.ngOnInit();
+    }else{
+      this.produto = this.produto.filter(res => {
+        return res.produto.toLowerCase().match(this.searchInput.toLowerCase());
+      })
+    }
+  }
+
+
+   //Função exibir produtos por Ordem Alfabética
   getAll() {
     return this._httpclient.get(this.url+ '/api/tutorials', {headers: new HttpHeaders({'x-auth-token': this.token}) }).subscribe((result: any) => {
+      this.produto = [];
+      for (var item of result){
+        
+        this.produto.push({id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
+        })
+      }
+    })
+  }
+
+  //Exibir preço MAIOR
+  getExp() {
+    return this._httpclient.get(this.url+ '/api/tutorials/exp', {headers: new HttpHeaders({'x-auth-token': this.token}) }).subscribe((result: any) => {
+      this.produto = [];
+      for (var item of result){
+        
+        this.produto.push({id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
+        })
+      }
+    })
+  }
+
+  //Exibir preço MENOR
+  getCheap() {
+    return this._httpclient.get(this.url+ '/api/tutorials/cheap', {headers: new HttpHeaders({'x-auth-token': this.token}) }).subscribe((result: any) => {
       this.produto = [];
       for (var item of result){
         
@@ -164,10 +202,11 @@ export class CrudComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {label: 'Maior preço', icon: 'pi pi-dollar', command: () => {
-          this;
+          this.getExp();
       }},
+
       {label: 'Menor preço', icon: 'pi pi-dollar', command: () => {
-          this;
+          this.getCheap();
       }},
   ];
 

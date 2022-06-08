@@ -15,7 +15,7 @@
     <!--Campo de Busca-->
         <div class="p-inputgroup">
             <button type="button" pButton pRipple icon="pi pi-search" label="Buscar"></button>
-            <input type="text" pInputText placeholder="Encontre um Produto:">
+            <input class="form-control" [(ngModel)]="searchInput" (ngModelChange)="Search()" type="text" pInputText placeholder="Encontre um Produto:">
         </div><br>  
 
         <!-- <p-splitButton label="Ordenar por" [model]="this.items" styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton> -->

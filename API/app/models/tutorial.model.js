@@ -32,6 +32,8 @@ Tutorial.findById = (id, result) => {
     result({ kind: "not_found" }, null);
   });
 };
+
+//GET por ordem Alfabética
 Tutorial.getAll = (title, result) => {
   let query = "SELECT * FROM produtos ORDER BY produto";
   if (title) {
@@ -47,6 +49,43 @@ Tutorial.getAll = (title, result) => {
     result(null, res);
   });
 };
+
+//GET Mais Caro
+Tutorial.getExp = (title, result) => {
+  let query = "SELECT * FROM produtos ORDER BY preco DESC";
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
+//GET mais barato
+Tutorial.getCheap = (title, result) => {
+  let query = "SELECT * FROM produtos ORDER BY preco";
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+    console.log("tutorials: ", res);
+    result(null, res);
+  });
+};
+
+
+
 // Tutorial.getAllPublished = result => {
 //   sql.query("SELECT * FROM produtos WHERE published=true", (err, res) => {
 //     if (err) {

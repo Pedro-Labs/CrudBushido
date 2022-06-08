@@ -200,6 +200,11 @@ export class CrudComponent implements OnInit {
   
 
   ngOnInit(): void {
+
+    //alert('Você precisa estar logado para utilizar este sistema!')
+
+    this.showMaximizableDialog()
+
     this.items = [
       {label: 'Maior preço', icon: 'pi pi-dollar', command: () => {
           this.getExp();

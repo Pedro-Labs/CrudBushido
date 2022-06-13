@@ -13,6 +13,8 @@ import { MenuItem } from 'primeng/api';
 
 
 export class CrudComponent implements OnInit {
+  isButtonVisible!: boolean;
+  
   items!: MenuItem[];
 
   display!: boolean ;
@@ -26,6 +28,12 @@ export class CrudComponent implements OnInit {
   
   token!: string
   message!: boolean;
+
+  buttonVisible!: boolean
+
+  showButton(){
+    this.buttonVisible = true
+  }
 
   showMessage() {
     this.display = true;
@@ -180,10 +188,11 @@ export class CrudComponent implements OnInit {
     this._httpclient.post<any>(this.url + '/api/auth', {email:email, password: password }).subscribe((result:any) => {
       this.token = result.token;
       this.usuario = [];
-      this.getAll();
       this.inputEmail = "";
       this.inputPassword = "";
       this.displayMaximizable = false;
+      this.getAll();
+      this.isButtonVisible = true;
       
     })
   } 
@@ -201,9 +210,7 @@ export class CrudComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //alert('Você precisa estar logado para utilizar este sistema!')
-
-    this.showMaximizableDialog()
+    // this.showMaximizableDialog()
 
     this.items = [
       {label: 'Maior preço', icon: 'pi pi-dollar', command: () => {

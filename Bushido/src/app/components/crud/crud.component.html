@@ -1,41 +1,55 @@
 <body>
     <header class="banner" align="center">
-        <h1><span><img
-                    src="https://comofazeremcasa.net/wp-content/uploads/2020/06/desenho-de-dragao-10.jpg"
+        <h1><span><img src="https://comofazeremcasa.net/wp-content/uploads/2020/06/desenho-de-dragao-10.jpg"
                     class="logo" width="60"></span>Hajime Kimonos e Acessórios</h1>
     </header>
     <h2 align="center">Sistema de cadastro de Produtos:</h2>
+    <h3 align="center"><strong>ATENÇÃO!</strong> VOCÊ DEVE ESTAR LOGADO!!</h3>
+
+    <!-- <div class="yourCssClass" *ngIf="this.isButtonVisible" (click)="this.isButtonVisible = false">
+        PINTO
+        </div> -->
 
     <!-- Botão Login -->
-    <button pButton pRipple type="button" icon="pi pi-user" label="Login" class="p-button-rounded p-button-info"
+    <div align="center">
+        <button pButton pRipple type="button" icon="pi pi-user" label="Login" class="p-button-rounded p-button-info"
         (click)="showMaximizableDialog()"></button><br><br>
+    </div>
+    
 
 
-     <!--Botão Novo Produto-->   
+    <!--Botão Novo Produto-->
     <!-- <p-button label="Novo Produto" icon="pi pi-plus" (click)="showBasicDialog()"></p-button><br><br> -->
 
+    
     <!--Campo de Busca-->
-        <div class="p-inputgroup">
-            <button type="button" pButton pRipple icon="pi pi-search" label="Buscar"></button>
-            <input class="form-control" [(ngModel)]="searchInput" (ngModelChange)="Search()" type="text" pInputText placeholder="Encontre um Produto:">
-        </div><br>  
+    <div class="p-inputgroup" *ngIf="this.isButtonVisible">
+        <button type="button" pButton pRipple icon="pi pi-search" label="Buscar"></button>
+        <input class="form-control" [(ngModel)]="searchInput" (ngModelChange)="Search()" type="text" pInputText
+            placeholder="Encontre um Produto:">
+    </div><br>
 
-        <!-- <p-splitButton label="Ordenar por" [model]="this.items" styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton> -->
+    <!-- <p-splitButton label="Ordenar por" [model]="this.items" styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton> -->
 
-    <div>
+    <div *ngIf="this.isButtonVisible">
         <!-- Tabela de produtos -->
-        <p-table [value]="produto" [paginator]="true" [rows]="12" [rowsPerPageOptions]="[5, 12, 25, 20]"
+        <p-table [value]="produto" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 15, 20, 25]"
             [totalRecords]="totalRecords" [pageLinks]="3" [columns]="cols">
             <ng-template pTemplate="header">
                 <tr>
-                    
-                    <th style="background-color: rgb(229, 228, 238)"><span><p-button label="Novo Produto" icon="pi pi-plus" (click)="showBasicDialog()"></p-button></span></th>
+
+                    <th style="background-color: rgb(229, 228, 238)"><span>
+                            <p-button label="Novo Produto" *ngIf="this.isButtonVisible" icon="pi pi-plus" (click)="showBasicDialog()"></p-button>
+                        </span></th>
                     <th style="background-color: rgb(238, 228, 228)">Produto</th>
                     <th style="background-color: rgb(238, 228, 228)">Preço</th>
                     <th style="background-color: rgb(238, 228, 228)">Descrição</th>
                     <th style="background-color: rgb(229, 228, 238)">Ações</th>
 
-                    <th style="background-color: rgb(229, 228, 238)"><span><p-splitButton label="Ordenar por" [model]="this.items" styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton></span></th>
+                    <th style="background-color: rgb(229, 228, 238)"><span>
+                            <p-splitButton label="Ordenar por" *ngIf="this.isButtonVisible" [model]="this.items"
+                                styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton>
+                        </span></th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-produto let-rowData let-columns="columns">

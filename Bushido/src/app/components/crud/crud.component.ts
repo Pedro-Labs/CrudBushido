@@ -88,7 +88,8 @@ export class CrudComponent implements OnInit {
   //Paginação
   totalRecords!: number;
   cols!: any[];
-
+  
+  loginVisible!: boolean
 
 
 
@@ -118,6 +119,7 @@ export class CrudComponent implements OnInit {
         this.produto.push({id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
         })
       }
+      this.isButtonVisible = true;
     })
   }
 
@@ -192,7 +194,7 @@ export class CrudComponent implements OnInit {
       this.inputPassword = "";
       this.displayMaximizable = false;
       this.getAll();
-      this.isButtonVisible = true;
+      this.loginVisible = false;
       
     })
   } 
@@ -210,7 +212,7 @@ export class CrudComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.showMaximizableDialog()
+     this.loginVisible = true
 
     this.items = [
       {label: 'Maior preço', icon: 'pi pi-dollar', command: () => {

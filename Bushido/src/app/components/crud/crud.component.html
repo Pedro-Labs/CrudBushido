@@ -11,7 +11,7 @@
         </div> -->
 
     <!-- Botão Login -->
-    <div align="center">
+    <div align="center" *ngIf="this.loginVisible">
         <button pButton pRipple type="button" icon="pi pi-user" label="Login" class="p-button-rounded p-button-info"
         (click)="showMaximizableDialog()"></button><br><br>
     </div>

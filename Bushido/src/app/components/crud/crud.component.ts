@@ -101,7 +101,7 @@ export class CrudComponent implements OnInit {
 
   Search(){
     if(this.searchInput == ""){
-      this.ngOnInit();
+      this.getAll(); //this.ngOnInit()
     }else{
       this.produto = this.produto.filter(res => {
         return res.produto.toLowerCase().match(this.searchInput.toLowerCase());
@@ -120,6 +120,7 @@ export class CrudComponent implements OnInit {
         })
       }
       this.isButtonVisible = true;
+      this.loginVisible = false;
     })
   }
 
@@ -177,6 +178,7 @@ export class CrudComponent implements OnInit {
   //Função Novo Produto
   new(produto: string, preco: string, descricao: string) {
     this._httpclient.post<any>(this.url + '/api/tutorials', {produto:produto, descricao: descricao, preco:preco},{headers: new HttpHeaders({'x-auth-token': this.token}) } ).subscribe((result: any) => {
+      
       this.produto = [];
       this.getAll();
       this.inputProduto2 = "";
@@ -185,6 +187,7 @@ export class CrudComponent implements OnInit {
       this.displayBasic = false;
     })
   }
+  
   //Função Login
   login(email: string, password: string) {
     this._httpclient.post<any>(this.url + '/api/auth', {email:email, password: password }).subscribe((result:any) => {
@@ -194,7 +197,7 @@ export class CrudComponent implements OnInit {
       this.inputPassword = "";
       this.displayMaximizable = false;
       this.getAll();
-      this.loginVisible = false;
+      
       
     })
   } 

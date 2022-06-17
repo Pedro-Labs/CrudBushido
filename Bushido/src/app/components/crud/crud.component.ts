@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { produtos, users } from './model/getmodel';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 
 
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
-  styleUrls: ['./crud.component.css']
+  styleUrls: ['./crud.component.css'],
+  providers: [MessageService]
 })
 
 
@@ -21,8 +22,9 @@ export class CrudComponent implements OnInit {
   displayBasic!: boolean;
   displayPosition!: boolean;
   displayMaximizable!: boolean;
+  // messageService!: MessageService
 
-  messageService: any;
+  // messageService: any;
   position!: string;
   value3!: string;
 
@@ -80,6 +82,7 @@ export class CrudComponent implements OnInit {
   inputPassword = "";
 
   inputProduto2 = "";
+
   inputPreco2 = "";
   inputDescricao2 = "";
 
@@ -91,13 +94,43 @@ export class CrudComponent implements OnInit {
 
   loginVisible!: boolean
 
+//  loginOff() {
+//   this.loginVisible = false
+//   this.loginSuccess()
+//  }
 
-
-  constructor(private _route: Router, private _httpclient: HttpClient,) {
+  constructor(private _route: Router, private _httpclient: HttpClient, private messageService: MessageService) {
     this.usuario = [];
     this.produto = [];
   }
+  
+  onReject() {
+    this.messageService.clear('d');
+  }
 
+   loginSuccess() {
+     this.messageService.add({key:'a', severity:'success', summary: 'Logado com sucesso!', detail: 'Bem Vindo!'});
+   }
+
+  createSuccess() {
+    this.messageService.add({key:'b', severity:'info', summary: 'Produto criado com sucesso!', detail: 'Adicionado na tabela.'});
+  }
+
+  updateSuccess() {
+    this.messageService.add({key:'c', severity:'info', summary: 'Produto atualizado com sucesso!', detail: 'Editado na tabela.'});
+  }
+
+  showConfirm(produto: string, preco: string, id: number) {
+    this.inputProduto = produto;
+    this.inputPreco = preco;
+    this.inputId = id;
+    this.messageService.clear();
+    this.messageService.add({key: 'd', sticky: true, severity:'error', summary:'Tem Certeza que deseja excluir o produto:', detail:'Após a exclusão o produto não poderá ser restaurado!'});
+}
+
+  deleteSuccess() {
+    this.messageService.add({key:'e', severity:'info', summary: 'Produto excluído com sucesso!', detail: 'Removido da tabela.'});
+  }
 
   Search() {
     if (this.searchInput == "") {
@@ -109,6 +142,21 @@ export class CrudComponent implements OnInit {
     }
   }
 
+  //getAll para funconar a msg de login
+  getAll2() {
+    return this._httpclient.get(this.url + '/api/tutorials', { headers: new HttpHeaders({ 'x-auth-token': this.token }) }).subscribe((result: any) => {
+      this.produto = [];
+      for (var item of result) {
+
+        this.produto.push({
+          id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
+        })
+      }
+      this.isButtonVisible = true;
+      this.loginVisible = false;
+      this.loginSuccess()
+    })
+  }
 
   //Função exibir produtos por Ordem Alfabética
   getAll() {
@@ -122,6 +170,7 @@ export class CrudComponent implements OnInit {
       }
       this.isButtonVisible = true;
       this.loginVisible = false;
+      // this.loginSuccess()
     })
   }
 
@@ -162,6 +211,7 @@ export class CrudComponent implements OnInit {
       // }else{
 
       // }
+      this.deleteSuccess()
       this.getAll();
       this.displayPosition = false;
     })
@@ -177,6 +227,7 @@ export class CrudComponent implements OnInit {
       //   }else{
 
       //   }
+      this.updateSuccess()
       this.getAll();
       this.display = false
     })
@@ -193,6 +244,7 @@ export class CrudComponent implements OnInit {
       this.inputPreco2 = "";
       this.inputDescricao2 = "";
       this.displayBasic = false;
+      this.createSuccess();
     })
   }
 
@@ -205,8 +257,8 @@ export class CrudComponent implements OnInit {
       this.inputEmail = "";
       this.inputPassword = "";
       this.displayMaximizable = false;
-      this.getAll();
-
+      this.getAll2();
+      
 
     })
   }
@@ -242,7 +294,7 @@ export class CrudComponent implements OnInit {
     ];
 
 
-    this.getAll();
+    // this.getAll();
     this.cols = [
       { field: 'produto', header: 'produto' },
       { field: 'preco', header: 'preco' },

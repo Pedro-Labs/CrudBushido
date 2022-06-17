@@ -70,11 +70,31 @@
                                 <!--Excluir-->
                                 <button pButton pRipple type="button" icon="pi pi-trash"
                                     class="p-button-rounded p-button-danger p-button-outlined"
-                                    (click)="showPositionDialog('top-right', produto.id)"></button>
+                                    (click)="showConfirm(produto.produto,produto.preco, produto.id)"></button>
 
                                 <!--Confirmar Exclusão-->
-
-                                <p-dialog header="Confirmar Exclusão" [(visible)]="displayPosition"
+                                <p-toast position="center" key="d" (onClose)="onReject()" [baseZIndex]="5000">
+                                    <ng-template let-message pTemplate="message">
+                                        <div class="flex flex-column" style="flex: 1">
+                                            <div class="text-center">
+                                                <i class="pi pi-exclamation-triangle" style="font-size: 3rem">ATENÇÃO!</i>
+                                                <h4>{{message.summary}}</h4><hr>
+                                                <h4 class="tom">"{{inputProduto}}"</h4>
+                                                <h4 class="tom">"{{inputPreco | currency: 'BRL'}}"</h4><hr>
+                                                <strong>{{message.detail}}</strong>
+                                            </div><br>
+                                            <div class="grid p-fluid">
+                                                <div class="col-6">
+                                                    <button type="button" pButton (click)="delete(inputId)" label="Confirmar" class="p-button-danger"></button>
+                                                </div><br>
+                                                <div class="col-6">
+                                                    <button type="button" pButton (click)="onReject()" label="Cancelar" class="p-button-success"></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </p-toast>
+                                <!-- <p-dialog header="Confirmar Exclusão" [(visible)]="displayPosition"
                                     [position]="position" [modal]="true" [style]="{width: '50vw'}" [draggable]="false"
                                     [resizable]="false">
                                     <p>Tem certeza que deseja excluir este produto?<br>
@@ -85,7 +105,7 @@
                                             (click)="delete(inputId)">
                                         </p-button>
                                     </ng-template>
-                                </p-dialog>
+                                </p-dialog> -->
                             </div>
                         </div>
                     </td>
@@ -191,13 +211,59 @@
 </p-dialog>
 
 
-<!-- Aviso de Autenticação-->
+<!-- Login sucesso -->
 
-<!-- <p-dialog header="Você precisa estar logado, para utilizar este sistema!" [(visible)]="message" [style]="{width: '50vw'}">
-    <p>Sua sessão foi expirada, ou usuário inválido.<br>
-        Tente Novamente, ou refaça o Login.
-    </p>
-    <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+<p-toast position="center" key="a" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-user" style="font-size: 1rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
     </ng-template>
-</p-dialog> -->
+</p-toast>
+
+
+
+<!-- Criação sucesso -->
+<p-toast position="top-right" key="b" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-info-circle" style="font-size: 1rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+
+<!-- Atualização sucesso -->
+<p-toast position="top-right" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-check" style="font-size: 1rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+
+<!-- Exclusão Sucesso -->
+<p-toast position="top-right" key="e" (onClose)="onReject()" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <i class="pi pi-check" style="font-size: 1.5rem"></i>
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

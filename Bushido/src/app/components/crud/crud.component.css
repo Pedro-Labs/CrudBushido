@@ -3,34 +3,37 @@
     border-radius: 5px;
     font-family: fantasy;
     background-color: #0b2b5f;
-    
+
 }
 
-h1{
+h1 {
     color: rgba(255, 255, 255, 0.918);
 }
 
-h2{
+h2 {
     font-family: cursive;
-    
+
 }
 
-h3{
+h3 {
     color: rgb(0, 0, 0);
     font-family: Fantasy;
 }
 
-strong{
+.tom {
+    color: rgba(0, 0, 0, 0.658);
+}
+
+strong {
     color: red;
 }
 
-.logo{
+.logo {
     padding-right: 5px;
 }
 
 
 
-.linhas{
+.linhas {
     color: rgb(255, 255, 255);
 }
-

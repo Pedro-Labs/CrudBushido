@@ -21,6 +21,7 @@ export class CrudComponent implements OnInit {
   display!: boolean;
   displayBasic!: boolean;
   displayPosition!: boolean;
+
   displayMaximizable!: boolean;
   // messageService!: MessageService
 
@@ -92,32 +93,47 @@ export class CrudComponent implements OnInit {
   totalRecords!: number;
   cols!: any[];
 
-  loginVisible!: boolean
+  loginVisible!: boolean;
 
-//  loginOff() {
-//   this.loginVisible = false
-//   this.loginSuccess()
-//  }
+  //ERRO DE USUÁRIO
+  displayError!: boolean;
+  showError(position: string) {
+    this.displayPosition = true;
+    this.position = position;
+  }
+
+  //  loginOff() {
+  //   this.loginVisible = false
+  //   this.loginSuccess()
+  //  }
 
   constructor(private _route: Router, private _httpclient: HttpClient, private messageService: MessageService) {
     this.usuario = [];
     this.produto = [];
   }
-  
+
   onReject() {
     this.messageService.clear('d');
   }
 
-   loginSuccess() {
-     this.messageService.add({key:'a', severity:'success', summary: 'Logado com sucesso!', detail: 'Bem Vindo!'});
-   }
+  loginSuccess() {
+    this.messageService.add({ key: 'a', severity: 'success', summary: 'Logado com sucesso!', detail: 'Bem Vindo!' });
+  }
+
+  loginFail() {
+    this.messageService.add({ key: 'f', severity: 'error', summary: 'Usuário não encontrado.', detail: 'Acesso Negado!' });
+  }
+
+  expiredSession() {
+    this.messageService.add({ key: 'g', severity: 'error', summary: 'Sessão Expirada!', detail: 'Faça o login novamente.' });
+  }
 
   createSuccess() {
-    this.messageService.add({key:'b', severity:'info', summary: 'Produto criado com sucesso!', detail: 'Adicionado na tabela.'});
+    this.messageService.add({ key: 'b', severity: 'info', summary: 'Produto criado com sucesso!', detail: 'Adicionado na tabela.' });
   }
 
   updateSuccess() {
-    this.messageService.add({key:'c', severity:'info', summary: 'Produto atualizado com sucesso!', detail: 'Editado na tabela.'});
+    this.messageService.add({ key: 'c', severity: 'info', summary: 'Produto atualizado com sucesso!', detail: 'Editado na tabela.' });
   }
 
   showConfirm(produto: string, preco: string, id: number) {
@@ -125,11 +141,11 @@ export class CrudComponent implements OnInit {
     this.inputPreco = preco;
     this.inputId = id;
     this.messageService.clear();
-    this.messageService.add({key: 'd', sticky: true, severity:'error', summary:'Tem Certeza que deseja excluir o produto:', detail:'Após a exclusão o produto não poderá ser restaurado!'});
-}
+    this.messageService.add({ key: 'd', sticky: true, severity: 'error', summary: 'Tem Certeza que deseja excluir o produto:', detail: 'Após a exclusão o produto não poderá ser restaurado!' });
+  }
 
   deleteSuccess() {
-    this.messageService.add({key:'e', severity:'info', summary: 'Produto excluído com sucesso!', detail: 'Removido da tabela.'});
+    this.messageService.add({ key: 'e', severity: 'info', summary: 'Produto excluído com sucesso!', detail: 'Removido da tabela.' });
   }
 
   Search() {
@@ -142,21 +158,6 @@ export class CrudComponent implements OnInit {
     }
   }
 
-  //getAll para funconar a msg de login
-  getAll2() {
-    return this._httpclient.get(this.url + '/api/tutorials', { headers: new HttpHeaders({ 'x-auth-token': this.token }) }).subscribe((result: any) => {
-      this.produto = [];
-      for (var item of result) {
-
-        this.produto.push({
-          id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
-        })
-      }
-      this.isButtonVisible = true;
-      this.loginVisible = false;
-      this.loginSuccess()
-    })
-  }
 
   //Função exibir produtos por Ordem Alfabética
   getAll() {
@@ -168,9 +169,8 @@ export class CrudComponent implements OnInit {
           id: item.id, produto: item.produto, descricao: item.descricao, preco: item.preco
         })
       }
-      this.isButtonVisible = true;
-      this.loginVisible = false;
-      // this.loginSuccess()
+      // this.isButtonVisible = true;
+      // this.loginVisible = false;
     })
   }
 
@@ -257,13 +257,23 @@ export class CrudComponent implements OnInit {
       this.inputEmail = "";
       this.inputPassword = "";
       this.displayMaximizable = false;
-      this.getAll2();
+      this.getAll();
       
-
+      //VALIDAÇÃO E MENSAGENS
+      if(!result.token) {
+        this.loginFail()
+      } else {
+        setTimeout(function(){
+          location.reload();
+        },1,8e+6 );
+        this.loginSuccess();
+        this.isButtonVisible = true;
+        this.loginVisible = false;
+      }
     })
   }
 
-  
+
   //Funções de navegação (desuso)
   navigateTo() {
     this._route.navigate(['/create-product'])

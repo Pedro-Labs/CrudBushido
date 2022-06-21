@@ -102,10 +102,6 @@ export class CrudComponent implements OnInit {
     this.position = position;
   }
 
-  //  loginOff() {
-  //   this.loginVisible = false
-  //   this.loginSuccess()
-  //  }
 
   constructor(private _route: Router, private _httpclient: HttpClient, private messageService: MessageService) {
     this.usuario = [];
@@ -258,14 +254,14 @@ export class CrudComponent implements OnInit {
       this.inputPassword = "";
       this.displayMaximizable = false;
       this.getAll();
-      
+
       //VALIDAÇÃO E MENSAGENS
-      if(!result.token) {
+      if (!result.token) {
         this.loginFail()
       } else {
-        setTimeout(function(){
+        setTimeout(function () {
           location.reload();
-        },1,8e+6 );
+        }, 1, 8e+6);
         this.loginSuccess();
         this.isButtonVisible = true;
         this.loginVisible = false;
@@ -312,6 +308,5 @@ export class CrudComponent implements OnInit {
     ];
     this.totalRecords = this.produto.length
   }
-
 
 }

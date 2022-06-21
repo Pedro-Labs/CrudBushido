@@ -261,7 +261,7 @@ export class CrudComponent implements OnInit {
       } else {
         setTimeout(function () {
           location.reload();
-        }, 1, 8e+6);
+        }, 18e+6);
         this.loginSuccess();
         this.isButtonVisible = true;
         this.loginVisible = false;
@@ -300,7 +300,7 @@ export class CrudComponent implements OnInit {
     ];
 
 
-    // this.getAll();
+    this.getAll();
     this.cols = [
       { field: 'produto', header: 'produto' },
       { field: 'preco', header: 'preco' },

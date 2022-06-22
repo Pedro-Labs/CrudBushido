@@ -31,8 +31,8 @@
 
     <!-- <p-splitButton label="Ordenar por" [model]="this.items" styleClass="p-button-raised p-button-danger p-button-text mr-2 mb-2"></p-splitButton> -->
 
+    <!-- Tabela de produtos -->
     <div *ngIf="this.isButtonVisible">
-        <!-- Tabela de produtos -->
         <p-table [value]="produto" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 15, 20, 25]"
             [totalRecords]="totalRecords" [pageLinks]="3" [columns]="cols">
             <ng-template pTemplate="header">
@@ -147,7 +147,7 @@
                 <span class="p-inputgroup-addon">Descrição</span>
                 <input id="descricao" name="descricao" [(ngModel)]="inputDescricao" type="text" pInputText
                     placeholder="Sobre o produto:">
-            </div>
+            </div><hr>
             <div class="col-12 md:col-4">
                 <span class="p-buttonset">
                     <button class="salvar" pButton type="button" label="Salvar" icon="pi pi-check"
@@ -207,7 +207,7 @@
                 <span class="p-inputgroup-addon">Descrição</span>
                 <input id="descricao" name="descricao" [(ngModel)]="inputDescricao2" type="text" pInputText
                     placeholder="Sobre o produto:">
-            </div>
+            </div><hr>
             <span class="p-buttonset">
                 <button class="salvar" pButton type="button" label="Salvar" icon="pi pi-check"
                     (click)="new(inputProduto2, inputPreco2, inputDescricao2)"></button>

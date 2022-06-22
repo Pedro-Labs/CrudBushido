@@ -297,6 +297,12 @@ export class CrudComponent implements OnInit {
           this.getCheap();
         }
       },
+
+      {
+        label: 'De A - Z', icon: 'pi pi-sort-alpha-up-alt', command: () => {
+          this.getAll();
+        }
+      },
     ];
 
 
